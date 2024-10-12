@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music NFT Collector Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .question { margin-bottom: 20px; }
+        .question p { font-weight: bold; }
+        .result { display: none; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>What Kind of Music NFT Collector Are You?</h1>
+        <div id="quiz">
+            <div class="question" data-archetype="A">
+                <p>1. What drives your decision to collect a music NFT?</p>
+                <input type="radio" name="q1" value="A"> I connect with the artist and their story.<br>
+                <input type="radio" name="q1" value="B"> I see long-term value and potential.<br>
+                <!-- Add other choices here -->
+            </div>
+            <!-- Repeat for all questions -->
+
+            <button onclick="getResult()">Get Result</button>
+        </div>
+
+        <div class="result" id="result">
+            <!-- Results will show here -->
+        </div>
+    </div>
+
+    <script>
+        function getResult() {
+            let scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+            let selectedAnswers = document.querySelectorAll('input[type="radio"]:checked');
+
+            selectedAnswers.forEach(answer => {
+                scores[answer.value]++;
+            });
+
+            let maxScore = Math.max(...Object.values(scores));
+            let archetype = Object.keys(scores).find(key => scores[key] === maxScore);
+
+            document.getElementById('result').innerText = `You are: ${archetype} Collector!`;
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
