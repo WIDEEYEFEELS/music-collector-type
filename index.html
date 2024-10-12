@@ -15,17 +15,41 @@
 <body>
     <div class="container">
         <h1>What Kind of Music NFT Collector Are You?</h1>
-        <div id="quiz">
-            <div class="question" data-archetype="A">
+        <form id="quizForm">
+            <div class="question">
                 <p>1. What drives your decision to collect a music NFT?</p>
-                <input type="radio" name="q1" value="A"> I connect with the artist and their story.<br>
-                <input type="radio" name="q1" value="B"> I see long-term value and potential.<br>
-                <!-- Add other choices here -->
+                <input type="radio" name="q1" value="Emotional Connector"> I connect with the artist and their story.<br>
+                <input type="radio" name="q1" value="Value-Seeker"> I see long-term value and potential.<br>
+                <input type="radio" name="q1" value="Pragmatic Supporter"> I like to support artists without expectations of gain.<br>
+                <input type="radio" name="q1" value="Community-Engaged Collector"> I enjoy being part of the community and events.<br>
+                <input type="radio" name="q1" value="Long-Term Patron"> I value collecting rare pieces that represent the artist's journey.<br>
+                <input type="radio" name="q1" value="Skeptical Investor"> I’ve grown cautious about where I invest.<br>
             </div>
-            <!-- Repeat for all questions -->
 
-            <button onclick="getResult()">Get Result</button>
-        </div>
+            <div class="question">
+                <p>2. How important is it for you to connect with the artist personally?</p>
+                <input type="radio" name="q2" value="Emotional Connector"> Extremely important, I love engaging with the artist.<br>
+                <input type="radio" name="q2" value="Value-Seeker"> Not a priority for me, I’m focused on the value.<br>
+                <input type="radio" name="q2" value="Pragmatic Supporter"> Somewhat important, but I mostly want to support their work.<br>
+                <input type="radio" name="q2" value="Community-Engaged Collector"> Important, I like interacting in artist communities.<br>
+                <input type="radio" name="q2" value="Long-Term Patron"> Moderately important, but I’m more focused on their growth.<br>
+                <input type="radio" name="q2" value="Skeptical Investor"> Not very important anymore.<br>
+            </div>
+
+            <div class="question">
+                <p>3. What’s your view on the financial value of NFTs?</p>
+                <input type="radio" name="q3" value="Emotional Connector"> It’s not my main concern.<br>
+                <input type="radio" name="q3" value="Value-Seeker"> It’s a key driver in my decisions.<br>
+                <input type="radio" name="q3" value="Pragmatic Supporter"> I don’t expect much financial gain.<br>
+                <input type="radio" name="q3" value="Community-Engaged Collector"> I’m more focused on community and connection.<br>
+                <input type="radio" name="q3" value="Long-Term Patron"> I consider it, but I’m in it for the long-term.<br>
+                <input type="radio" name="q3" value="Skeptical Investor"> I’m cautious about financial value.<br>
+            </div>
+
+            <!-- Add more questions as needed -->
+
+            <button type="button" onclick="getResult()">Get Result</button>
+        </form>
 
         <div class="result" id="result">
             <!-- Results will show here -->
@@ -34,19 +58,34 @@
 
     <script>
         function getResult() {
-            let scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+            // Initialize the scores for each archetype
+            let scores = {
+                "Emotional Connector": 0,
+                "Value-Seeker": 0,
+                "Pragmatic Supporter": 0,
+                "Community-Engaged Collector": 0,
+                "Long-Term Patron": 0,
+                "Skeptical Investor": 0
+            };
+
+            // Get the selected answers
             let selectedAnswers = document.querySelectorAll('input[type="radio"]:checked');
 
+            // Tally the scores
             selectedAnswers.forEach(answer => {
                 scores[answer.value]++;
             });
 
+            // Determine the highest score
             let maxScore = Math.max(...Object.values(scores));
-            let archetype = Object.keys(scores).find(key => scores[key] === maxScore);
+            let resultArchetype = Object.keys(scores).find(key => scores[key] === maxScore);
 
-            document.getElementById('result').innerText = `You are: ${archetype} Collector!`;
+            // Display the result
+            let resultText = `You are a ${resultArchetype} collector!`;
+            document.getElementById('result').innerText = resultText;
             document.getElementById('result').style.display = 'block';
         }
     </script>
 </body>
 </html>
+
